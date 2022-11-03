@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Dad Jokes</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <h1>Dad Jokes</h1>
+    <button id="aris-button">click</button>
+
+    <div id="text-here"></div>
+
+    
+    <script>
+        const endpoint = "https://icanhazdadjoke.com/";
+        document.querySelector("#aris-button").addEventListener('click',getQuote);
+        
+       async function getQuote(){
+        axios.get("https://icanhazdadjoke.com/", {
+            headers: {'Accept':'application/json'}
+        })
+        .then(response => {
+            data = response.data
+            console.log(data.joke)
+            displayText(data.joke)
+        })
+        .catch(error => {
+            console.log(error.message)
+        }
+        )}
+
+        function displayText(text){
+            const element = document.querySelector("#text-here")
+            element.textContent = text
+
+        }
+
+
+    </script>
+</body>
+</html>
